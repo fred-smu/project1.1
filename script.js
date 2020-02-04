@@ -11,7 +11,7 @@ var settings = {
 
 $.ajax(settings).done(function (response) {
 	console.log(response);
-// });
+});
 
 // var settings = {
 // 	"async": true,
@@ -28,18 +28,18 @@ $.ajax(settings).done(function (response) {
 // 	console.log(response);
 // });
 
-var settings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://currency-converter5.p.rapidapi.com/currency/convert?format=json&from=AUD&to=AUD&amount=1",
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "currency-converter5.p.rapidapi.com",
-		"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
-	}
-}
+// var settings = {
+// 	"async": true,
+// 	"crossDomain": true,
+// 	"url": "https://currency-converter5.p.rapidapi.com/currency/convert?format=json&from=AUD&to=AUD&amount=1",
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-host": "currency-converter5.p.rapidapi.com",
+// 		"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
+// 	}
+// }
 
-$.ajax(settings).done(function (response) {
-	console.log(response);
-});
+// $.ajax(settings).done(function (response) {
+// 	console.log(response);
+// });
 
