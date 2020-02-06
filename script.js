@@ -44,6 +44,7 @@ console.log("SNP ="+ cur.result[0].regularMarketPrice.raw);
 console.log("DJI ="+ cur.result[1].regularMarketPrice.raw);
 console.log("NASDAQ ="+ cur.result[2].regularMarketPrice.raw);
 });
+//test comment
 /******************************************************************** */
 // {quoteResponse: {…}}
 // quoteResponse:
