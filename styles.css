@@ -1,30 +1,12 @@
-* {
-    border: black, solid;
+body {
+    background-color: rgb(175, 245, 175);
+    font-family: 'Source Sans Pro', sans-serif;
+    ;
 }
+#currencyChange {
+    height: 30px;
+    margin-top: 23px;
+    padding: 1px;
+    border-width:  1px;
 
-.card-text {
-    
 }
-.row {
-    margin: 10px;
-}
-
-#dow {
-    justify-content: space-around;
-}
-/* .row {
-    justify-content: space-around;
-} */
-.container {
-    flex-flow: wrap;
-    justify-content: space-around;
-}
-.card
-/* .card {
-    float: left;
-}
-[class^="col"] {
-    border: dotted red;
-    
-    
-}   */
