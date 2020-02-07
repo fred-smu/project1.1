@@ -50,17 +50,35 @@ function financeNASDAQ() {
 		}
 	}
 
-	$.ajax(settings).done(function (topResponse) {
-		console.log(topResponse);
-		var cur = topResponse.marketSummaryResponse;
-		SNP = cur.result[0].regularMarketPrice.raw;
-		DJI = cur.result[1].regularMarketPrice.raw;
-		NASDAQ = cur.result[2].regularMarketPrice.raw;
-		console.log("SNP =" + cur.result[0].regularMarketPrice.raw);
-		console.log("DJI =" + cur.result[1].regularMarketPrice.raw);
-		console.log("NASDAQ =" + cur.result[2].regularMarketPrice.raw);
-	});
-}
+$.ajax(settings).done(function (response) {
+	console.log(response);
+});
+
+// var settings = {
+// 	"async": true,
+// 	"crossDomain": true,
+// 	"url": "https://investors-exchange-iex-trading.p.rapidapi.com/stock/msft/effective-spread",
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-host": "investors-exchange-iex-trading.p.rapidapi.com",
+// 		"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
+// 	}
+// }
+
+// $.ajax(settings).done(function (response) {
+// 	console.log(response);
+// });
+
+// var settings = {
+// 	"async": true,
+// 	"crossDomain": true,
+// 	"url": "https://currency-converter5.p.rapidapi.com/currency/convert?format=json&from=AUD&to=AUD&amount=1",
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-host": "currency-converter5.p.rapidapi.com",
+// 		"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
+// 	}
+// }
 /******************************************************************** */
 // {quoteResponse: {…}}
 // quoteResponse:
@@ -141,6 +159,11 @@ function currencyAPI(currencySymbols, amountUSD) {
 			"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
 		}
 	}
+}
+
+// $.ajax(settings).done(function (response) {
+// 	console.log(response);
+// });
 
 	$.ajax(settings).done(function (response) {
 		rate = "response.rates"+currencySymbols+".rate";
