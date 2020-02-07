@@ -1,12 +1,11 @@
 body {
     background-color: rgb(175, 245, 175);
     font-family: 'Source Sans Pro', sans-serif;
-    ;
+    
 }
 #currencyChange {
     height: 30px;
     margin-top: 23px;
     padding: 1px;
     border-width:  1px;
-
 }
