@@ -2,9 +2,7 @@
     border: black, solid;
 }
 
-.card-text {
-    
-}
+
 .row {
     margin: 10px;
 }
@@ -19,12 +17,3 @@
     flex-flow: wrap;
     justify-content: space-around;
 }
-.card
-/* .card {
-    float: left;
-}
-[class^="col"] {
-    border: dotted red;
-    
-    
-}   */
