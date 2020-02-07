@@ -36,7 +36,7 @@ function financeAPI(stockSymbol) {
 			"x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
 			"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
 		}
-	}
+	};
 
 	$.ajax(stockSettings).done(function (stockResponse) {
 		console.log(stockResponse);
@@ -53,7 +53,7 @@ function financeAPI(stockSymbol) {
 
 			currencyAPI("GBP", marketPrice);
 			btn_press = false;
-		};
+		}
 	});
 }
 
@@ -69,7 +69,7 @@ function financeNASDAQ() {
 			"x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
 			"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
 		}
-	}
+	};
 
 	$.ajax(settings).done(function (response) {
 		var cur = response.marketSummaryResponse;
@@ -202,7 +202,7 @@ function currencyAPI(currencySymbols, amountUSD) {
 			"x-rapidapi-host": "currency-converter5.p.rapidapi.com",
 			"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
 		}
-	}
+	};
 
 
 	// $.ajax(settings).done(function (response) {
@@ -224,17 +224,17 @@ function currencyAPI(currencySymbols, amountUSD) {
 			console.log("EUR=" + marketPrice);
 			console.log("currencyReturn=" + currencyReturn);
 			$("#defaultCtry1").text("EUR = " + currencyReturn);
-		};
+		}
 		if (currencySymbols === "JPY") {
 			$("#defaultCtry2").text("JPY = " + currencyReturn);
 			console.log("JPY=" + marketPrice);
 			console.log("currencyReturn=" + currencyReturn);
-		};
+		}
 		if (currencySymbols === "GBP") {
 			$("#defaultCtry3").text("GBP = " + currencyReturn);
 			console.log("GBP=" + marketPrice);
 			console.log("currencyReturn=" + currencyReturn);
-		};
+		}
 	
 	});
 }
