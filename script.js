@@ -16,6 +16,7 @@ $("#search-button").on("click", function (event) {
 	btn_press = true;
 	stockSymbol = $("#stockSymbol").val();
 	financeAPI(stockSymbol);
+	
 
 
 });
@@ -86,7 +87,7 @@ function financeNASDAQ() {
 		$("#Sp500").text(SNP);
 		$("#nasdaq").text(NASDAQ);
 
-
+ /*************************************** */
 
 		/*****************display filds for this api call */
 		// <div class="col" id="dow">DOW</div>
