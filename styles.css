@@ -1,0 +1,19 @@
+* {
+    border: black, solid;
+}
+
+
+.row {
+    margin: 10px;
+}
+
+#dow {
+    justify-content: space-around;
+}
+/* .row {
+    justify-content: space-around;
+} */
+.container {
+    flex-flow: wrap;
+    justify-content: space-around;
+}

@@ -1,18 +1,31 @@
-var stockSymbol = "AAPL";
+var stockSymbol = "";
 var sym1 = "AAA";
 var currencySymbols = "AUD";
-var amountUSD = 1;
-var marketPrice = 999.99;
-var SNP = 999.99;
-var DJI = 999.99;
-var NASDAQ = 999.99;
-var currencyReturn = 999.99;
+var amountUSD;
+var marketPrice;
+var SNP;
+var DJI;
+var NASDAQ;
+var currencyReturn = "";
+var btn_press = false;
 
-currencyAPI(currencySymbols,amountUSD);
-financeAPI(stockSymbol);
-financeNASDAQ();
+// financeNASDAQ();
+
+$("#search-button").on("click", function (event) {
+	event.preventDefault();
+	btn_press = true;
+	stockSymbol = $("#stockSymbol").val();
+	financeAPI(stockSymbol);
+
+
+});
+
+// currencyAPI(currencySymbols, amountUSD);
+// financeAPI(stockSymbol);
+//  financeNASDAQ();
 
 function financeAPI(stockSymbol) {
+
 	var stockSettings = {
 		"async": true,
 		"crossDomain": true,
@@ -29,10 +42,18 @@ function financeAPI(stockSymbol) {
 		console.log(stockResponse);
 		var cur = stockResponse.quoteResponse.result[0];
 
-		var sym1 = cur.symbol;
-		var marketPrice = cur.regularMarketPrice;
-		console.log("sym1 =" + cur.symbol);
-		console.log("marketPrice =" + cur.regularMarketPrice);
+		sym1 = cur.symbol;
+		marketPrice = cur.regularMarketPrice;
+		marketPrice = parseFloat(marketPrice).toFixed(2);
+		$("#defaultPrice").text(marketPrice);
+		if (btn_press) {
+			currencyAPI("EUR", marketPrice);
+
+			currencyAPI("JPY", marketPrice);
+
+			currencyAPI("GBP", marketPrice);
+			btn_press = false;
+		};
 	});
 }
 
@@ -50,17 +71,58 @@ function financeNASDAQ() {
 		}
 	}
 
-	$.ajax(settings).done(function (topResponse) {
-		console.log(topResponse);
-		var cur = topResponse.marketSummaryResponse;
+	$.ajax(settings).done(function (response) {
+		var cur = response.marketSummaryResponse;
+		// SNP = response.marketSummaryResponse.result[0].regularMarketPrice.raw;
 		SNP = cur.result[0].regularMarketPrice.raw;
 		DJI = cur.result[1].regularMarketPrice.raw;
 		NASDAQ = cur.result[2].regularMarketPrice.raw;
-		console.log("SNP =" + cur.result[0].regularMarketPrice.raw);
-		console.log("DJI =" + cur.result[1].regularMarketPrice.raw);
-		console.log("NASDAQ =" + cur.result[2].regularMarketPrice.raw);
+		// stockResponse.quoteResponse.result[0];
+		// console.log(response);
+		// console.log("snp =" + SNP);
+		// console.log("dow =" + DJI);
+		// console.log("nasdaq =" + NASDAQ);
+		$("#dow").text(DJI);
+		$("#Sp500").text(SNP);
+		$("#nasdaq").text(NASDAQ);
+
+
+
+		/*****************display filds for this api call */
+		// <div class="col" id="dow">DOW</div>
+		// <div class="col" id="Sp500">SP 500</div>
+		// <div class="col" id="nasdaq">NASDAQ</div>
+		/************************vars */
+		// SNP = 999.99;
+		// DJI = 999.99;
+		// NASDAQ = 999.99;
 	});
 }
+// var settings = {
+// 	"async": true,
+// 	"crossDomain": true,
+// 	"url": "https://investors-exchange-iex-trading.p.rapidapi.com/stock/msft/effective-spread",
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-host": "investors-exchange-iex-trading.p.rapidapi.com",
+// 		"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
+// 	}
+// }
+
+// $.ajax(settings).done(function (response) {
+// 	console.log(response);
+// });
+
+// var settings = {
+// 	"async": true,
+// 	"crossDomain": true,
+// 	"url": "https://currency-converter5.p.rapidapi.com/currency/convert?format=json&from=AUD&to=AUD&amount=1",
+// 	"method": "GET",
+// 	"headers": {
+// 		"x-rapidapi-host": "currency-converter5.p.rapidapi.com",
+// 		"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
+// 	}
+// }
 /******************************************************************** */
 // {quoteResponse: {…}}
 // quoteResponse:
@@ -130,7 +192,7 @@ function financeNASDAQ() {
 
 function currencyAPI(currencySymbols, amountUSD) {
 
-
+	// console.log("inprice =" + amountUSD);
 	var settings = {
 		"async": true,
 		"crossDomain": true,
@@ -142,14 +204,38 @@ function currencyAPI(currencySymbols, amountUSD) {
 		}
 	}
 
+
+	// $.ajax(settings).done(function (response) {
+	// 	console.log(response);
+	// });
+
 	$.ajax(settings).done(function (response) {
-		rate = "response.rates"+currencySymbols+".rate";
+		rate = "response.rates" + currencySymbols + ".rate";
 		// rateTwo
 		// ."+currencySymbols+".rate"
 		console.log(response);
 		//var currencyReturn = response.rates.AUD.rate;
-		currencyReturn = response.rates[currencySymbols].rate;
-		console.log("$---"+currencyReturn);
+		currencyReturn = response.rates[currencySymbols].rate_for_amount;
+		currencyReturn = parseFloat(currencyReturn).toFixed(2);
+		console.log("$---" + currencySymbols);
+		console.log("$---" + currencyReturn);
+		if (currencySymbols === "EUR") {
+			currencyAPI("EUR", marketPrice);
+			console.log("EUR=" + marketPrice);
+			console.log("currencyReturn=" + currencyReturn);
+			$("#defaultCtry1").text("EUR = " + currencyReturn);
+		};
+		if (currencySymbols === "JPY") {
+			$("#defaultCtry2").text("JPY = " + currencyReturn);
+			console.log("JPY=" + marketPrice);
+			console.log("currencyReturn=" + currencyReturn);
+		};
+		if (currencySymbols === "GBP") {
+			$("#defaultCtry3").text("GBP = " + currencyReturn);
+			console.log("GBP=" + marketPrice);
+			console.log("currencyReturn=" + currencyReturn);
+		};
+	
 	});
 }
 
