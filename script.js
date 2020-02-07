@@ -1,50 +1,66 @@
-var stockSymols = "AAPL";
+var stockSymbol = "AAPL";
+var sym1 = "AAA";
+var currencySymbols = "AUD";
+var amountUSD = 1;
+var marketPrice = 999.99;
+var SNP = 999.99;
+var DJI = 999.99;
+var NASDAQ = 999.99;
+var currencyReturn = 999.99;
 
+currencyAPI(currencySymbols,amountUSD);
+financeAPI(stockSymbol);
+financeNASDAQ();
 
-var stockSettings = {
-	"async": true,
-	"crossDomain": true,
-	// "url": "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-summary?region=US&lang=en&",
-	"url": "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-quotes?region=US&lang=en&symbols="+ stockSymols +"%252CKC%253DF%252C002210.KS%252CIWM%252CAMECX",
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-		"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
+function financeAPI(stockSymbol) {
+	var stockSettings = {
+		"async": true,
+		"crossDomain": true,
+		// "url": "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-summary?region=US&lang=en&",
+		"url": "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-quotes?region=US&lang=en&symbols=" + stockSymbol + "%252CKC%253DF%252C002210.KS%252CIWM%252CAMECX",
+		"method": "GET",
+		"headers": {
+			"x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
+			"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
+		}
 	}
+
+	$.ajax(stockSettings).done(function (stockResponse) {
+		console.log(stockResponse);
+		var cur = stockResponse.quoteResponse.result[0];
+
+		var sym1 = cur.symbol;
+		var marketPrice = cur.regularMarketPrice;
+		console.log("sym1 =" + cur.symbol);
+		console.log("marketPrice =" + cur.regularMarketPrice);
+	});
 }
 
-$.ajax(stockSettings).done(function (stockResponse) {
-	console.log(stockResponse);
-	var cur =stockResponse.quoteResponse.result[0];
+function financeNASDAQ() {
 
-	var sym1 = cur.symbol;
-	var marketPrice = cur.regularMarketPrice;
-	console.log("sym1 ="+ cur.symbol);
-	console.log("marketPrice ="+ cur.regularMarketPrice);
-});
 
-var settings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-summary?region=US&lang=en",
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-		"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
+	var settings = {
+		"async": true,
+		"crossDomain": true,
+		"url": "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-summary?region=US&lang=en",
+		"method": "GET",
+		"headers": {
+			"x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
+			"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
+		}
 	}
-}
 
-$.ajax(settings).done(function (topResponse) {
-	console.log(topResponse);
-var cur =topResponse.marketSummaryResponse;
-var SNP = cur.result[0].regularMarketPrice.raw;
-var DJI = cur.result[1].regularMarketPrice.raw;
-var NASDAQ = cur.result[2].regularMarketPrice.raw;
-console.log("SNP ="+ cur.result[0].regularMarketPrice.raw);
-console.log("DJI ="+ cur.result[1].regularMarketPrice.raw);
-console.log("NASDAQ ="+ cur.result[2].regularMarketPrice.raw);
-});
-//test comment
+	$.ajax(settings).done(function (topResponse) {
+		console.log(topResponse);
+		var cur = topResponse.marketSummaryResponse;
+		SNP = cur.result[0].regularMarketPrice.raw;
+		DJI = cur.result[1].regularMarketPrice.raw;
+		NASDAQ = cur.result[2].regularMarketPrice.raw;
+		console.log("SNP =" + cur.result[0].regularMarketPrice.raw);
+		console.log("DJI =" + cur.result[1].regularMarketPrice.raw);
+		console.log("NASDAQ =" + cur.result[2].regularMarketPrice.raw);
+	});
+}
 /******************************************************************** */
 // {quoteResponse: {…}}
 // quoteResponse:
@@ -110,23 +126,32 @@ console.log("NASDAQ ="+ cur.result[2].regularMarketPrice.raw);
 // symbol: "AAPL"
 /**********************END************************* */
 
-var currencySymbols = "AUD";
-var amountUSD = 1;
 
-var settings = {
-	"async": true,
-	"crossDomain": true,
-	"url": "https://currency-converter5.p.rapidapi.com/currency/convert?format=json&from=USD&to="+currencySymbols+"&amount="+amountUSD,
-	"method": "GET",
-	"headers": {
-		"x-rapidapi-host": "currency-converter5.p.rapidapi.com",
-		"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
+
+function currencyAPI(currencySymbols, amountUSD) {
+
+
+	var settings = {
+		"async": true,
+		"crossDomain": true,
+		"url": "https://currency-converter5.p.rapidapi.com/currency/convert?format=json&from=USD&to=" + currencySymbols + "&amount=" + amountUSD,
+		"method": "GET",
+		"headers": {
+			"x-rapidapi-host": "currency-converter5.p.rapidapi.com",
+			"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
+		}
 	}
-}
 
-$.ajax(settings).done(function (response) {
-	console.log(response);
-});
+	$.ajax(settings).done(function (response) {
+		rate = "response.rates"+currencySymbols+".rate";
+		// rateTwo
+		// ."+currencySymbols+".rate"
+		console.log(response);
+		//var currencyReturn = response.rates.AUD.rate;
+		currencyReturn = response.rates[currencySymbols].rate;
+		console.log("$---"+currencyReturn);
+	});
+}
 
 /************************Response Sample************************************ */
 // {amount: "1.0000", base_currency_code: "USD", base_currency_name: "US Dollar", rates: {…}, status: "success", …}
