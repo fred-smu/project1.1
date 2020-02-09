@@ -7,24 +7,95 @@ var SNP;
 var DJI;
 var NASDAQ;
 var currencyReturn = "";
+var CCflag = false;
 var btn_press = false;
+var btn_select = false;
+var lockPrice;
+var newsym;
+currencyCh = [
+	"Albania Lek,ALL",
+	    "Argentina Peso,ARS",
+	    "Australia Dollar,AUD",
+	    "Azerbaijan Manat,AZN",
+	    "Belarus Ruble,BYN",
+	    "Bulgaria Lev,BGN",
+	    "Brazil Real,BRL",
+	    "Brunei Darussalam Dollar,BND",
+	    "Cambodia Riel,KHR",
+	    "Canada Dollar,CAD",
+	    "Chile Peso,CLP",
+	    "China Yuan Renminbi,CNY",
+	    "Croatia Kuna,HRK",
+	    "Czech Republic Koruna,CZK",
+	    "Denmark Krone,DKK",
+	    "Egypt Pound,EGP",
+	    "Euro Member Countries,EUR",
+	    "Hong Kong Dollar,HKD",
+	    "Hungary Forint,HUF",
+	    "Iceland Krona,ISK",
+	    "India Rupee,INR",
+	    "Indonesia Rupiah,IDR",
+	    "Iran Rial,IRR",
+	    "Israel Shekel,ILS",
+	    "Japan Yen,JPY",
+	    "Kazakhstan Tenge,KZT",
+	    "Korea (South) Won,KRW",
+	    "Kyrgyzstan Som,KGS",
+	    "Laos Kip,LAK",
+	    "Lebanon Pound,LBP",
+	    "Macedonia Denar,MKD",
+	    "Malaysia Ringgit,MYR",
+	    "Mexico Peso,MXN",
+	    "Nepal Rupee,NPR",
+	    "New Zealand Dollar,NZD",
+	    "Norway Krone,NOK",
+	    "Oman Rial,OMR",
+	    "Pakistan Rupee,PKR",
+	    "Philippines Peso,PHP",
+	    "Poland Zloty,PLN",
+	    "Qatar Riyal,QAR",
+	    "Romania Leu,RON",
+	    "Russia Ruble,RUB",
+	    "Saudi Arabia Riyal,SAR",
+	    "Serbia Dinar,RSD",
+	    "Singapore Dollar,SGD",
+	    "South Africa Rand,ZAR",
+	    "Sri Lanka Rupee,LKR",
+	    "Sweden Krona,SEK",
+	    "Switzerland Franc,CHF",
+	    "Taiwan New Dollar,TWD",
+	    "Thailand Baht,THB",
+	    "Turkey Lira,TRY",
+	    "Ukraine Hryvnia,UAH",
+	    "United Kingdom Pound,GBP",
+	    "United States Dollar,USD",
+	    "Uzbekistan Som,UZS",
+	    "Viet Nam Dong,VND"]
 
-// financeNASDAQ();
 
+
+
+
+// "html","css","java","javascript","php","c++","node.js","ASP","JSP","SQL"];
+ fredCode();
+financeNASDAQ();
+// on click og the search button 
 $("#search-button").on("click", function (event) {
 	event.preventDefault();
+	// document.getElementById("#currencyChange").value = "Select";
+	// document.getElementById("mySelect").value = "banana";
 	btn_press = true;
 	stockSymbol = $("#stockSymbol").val();
 	financeAPI(stockSymbol);
-	
 
 
 });
-
-// currencyAPI(currencySymbols, amountUSD);
-// financeAPI(stockSymbol);
-//  financeNASDAQ();
-
+$("#currencyChange").on("click", function (event) {
+	var selectVal = $("#currencyChange :selected").text();
+	var selectLenght = selectVal.length;
+	var newsym = selectVal.slice((selectLenght - 3), selectLenght)
+});
+// returns the selling price for the Symbol
 function financeAPI(stockSymbol) {
 
 	var stockSettings = {
@@ -48,16 +119,18 @@ function financeAPI(stockSymbol) {
 		marketPrice = parseFloat(marketPrice).toFixed(2);
 		$("#defaultPrice").text(marketPrice);
 		if (btn_press) {
-			currencyAPI("EUR", marketPrice);
-
-			currencyAPI("JPY", marketPrice);
-
-			currencyAPI("GBP", marketPrice);
+			lockPrice = marketPrice;
 			btn_press = false;
-		}
+			currencyAPI("EUR", marketPrice);
+			currencyAPI("JPY", marketPrice);
+			currencyAPI("GBP", marketPrice);
+		};
+		var newListItem = '<li id="searchHist">' + stockSymbol + ' Selling For$' + marketPrice + '</li>';
+		$('#searchResult').prepend(newListItem);
+
 	});
 }
-
+// set the Nasdq,SNP500,Doe Jones
 function financeNASDAQ() {
 
 
@@ -74,182 +147,83 @@ function financeNASDAQ() {
 
 	$.ajax(settings).done(function (response) {
 		var cur = response.marketSummaryResponse;
-		// SNP = response.marketSummaryResponse.result[0].regularMarketPrice.raw;
 		SNP = cur.result[0].regularMarketPrice.raw;
 		DJI = cur.result[1].regularMarketPrice.raw;
 		NASDAQ = cur.result[2].regularMarketPrice.raw;
-		// stockResponse.quoteResponse.result[0];
-		// console.log(response);
-		// console.log("snp =" + SNP);
-		// console.log("dow =" + DJI);
-		// console.log("nasdaq =" + NASDAQ);
-		$("#dow").text(DJI);
-		$("#Sp500").text(SNP);
-		$("#nasdaq").text(NASDAQ);
-
- /*************************************** */
-
-		/*****************display filds for this api call */
-		// <div class="col" id="dow">DOW</div>
-		// <div class="col" id="Sp500">SP 500</div>
-		// <div class="col" id="nasdaq">NASDAQ</div>
-		/************************vars */
-		// SNP = 999.99;
-		// DJI = 999.99;
-		// NASDAQ = 999.99;
+		// $("#dow").text(DJI);
+		// $("#Sp500").text(SNP);
+		// $("#nasdaq").text(NASDAQ);
+		$("#dow").html(DJI);
+		$("#sp500").html(SNP);
+		$("#nasdaq").html(NASDAQ);
 	});
 }
-// var settings = {
-// 	"async": true,
-// 	"crossDomain": true,
-// 	"url": "https://investors-exchange-iex-trading.p.rapidapi.com/stock/msft/effective-spread",
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-host": "investors-exchange-iex-trading.p.rapidapi.com",
-// 		"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
-// 	}
-// }
-
-// $.ajax(settings).done(function (response) {
-// 	console.log(response);
-// });
-
-// var settings = {
-// 	"async": true,
-// 	"crossDomain": true,
-// 	"url": "https://currency-converter5.p.rapidapi.com/currency/convert?format=json&from=AUD&to=AUD&amount=1",
-// 	"method": "GET",
-// 	"headers": {
-// 		"x-rapidapi-host": "currency-converter5.p.rapidapi.com",
-// 		"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
-// 	}
-// }
-/******************************************************************** */
-// {quoteResponse: {…}}
-// quoteResponse:
-// result: Array(5)
-// 0:
-// language: "en-US"
-// region: "US"
-// quoteType: "EQUITY"
-// triggerable: true
-// quoteSourceName: "Nasdaq Real Time Price"
-// currency: "USD"
-// sharesOutstanding: 4375479808
-// marketCap: 1401422479360
-// sourceInterval: 15
-// exchangeTimezoneName: "America/New_York"
-// exchangeTimezoneShortName: "EST"
-// pageViews: {shortTermTrend: "DOWN", midTermTrend: "UP", longTermTrend: "UP"}
-// gmtOffSetMilliseconds: -18000000
-// esgPopulated: false
-// tradeable: true
-// components: (260) ["^NQDMXJPLMAUD", "^NQDOG", "^NQUSBLM", "^NQSHYL", "^QIV", "^NQDXUSMLTCGN", "^NQUS500LCGN", "^NQUSB9572LMCADN", "^NQGMOIN", "^NQSXYN", "^NQGS", "^NQNALMEURN", "^NQUSB9000LMJPYN", "^NQUSB9572LMN", "^NQUSBLMCAD", "^NQUSB9000LMEURN", "^NQDMXKRJPYN", "^NQDMXKRLMAUDN", "^NQNA9000LMGBPN", "^NQUSB9570LMJPY", "^NQDMXJPLMAUDN", "^NQDMXKRLMAUD", "^NQUSBLMJPY", "^NDXCHF", "^NQNA9000LMEUR", "^AIX", "^NQNA9000LMCAD", "^NQGXGBLMN", "^NQDMXKRLCJPY", "^NQUSB9000LMEUR", "^NQDXUSLCEUR", "^NQUSB9572LMAUDN", "^NQDXUSLCG", "^CAPEXA", "^CPQ", "^CPQNTR", "^NQUSB9000LMCAD", "^NQDM9000LMJPY", "^NQG9000LMCADN", "^NQDMXKRAUD", "^NQDMXKRLMGBPN", "^NQGXGBLMGBPN", "^NQDM9000LMEURN", "^NQGXJPLMJPYN", "^NQNALMCADN", "^NQUSBLMEUR", "^NQG9000LMGBP", "^NQDM9000LMJPYN", "^NQNALMJPY", "^DWANQTL", "^MSH", "^NDX", "^NQGXGBLMJPY", "^QCRD", "^NQUSB9570LMGBPN", "^IXCO", "^NQGXJPLMJPY", "^NQDMXKR", "^NQDMXGBLMCADN", "^NQUSB9000LMJPY", "^NQDMXKRLCN", "^NQGXGBLMEURN", "^NQGXJPLMCAD", "^NQGXJPLMEUR", "^XNDXNNRCHF", "^DWARJFMU", "^NQUSB9572LMEUR", "^NQDMXJPLMGBPN", "^NQDMXJPLMN", "^NQUSB9572LMCAD", "^NQSXY", "^NQDM9000LMAUD", "^NQDMXKRLCJPYN", "^NQDMXKRLMCADN", "^NQDMXKRLCEUR", "^NQUSB9000LMN", "^NQDXUSLC", "^NQUSB9570LMAUDN", "^NQGXGBLMJPYN", "^NQUSB9572LMEURN", "^NQG9000LMJPYN", "^NQUSBLMEURN", "^NQDMXKRJPY", "^NQDMXKRLCCAD", "^NQUSB9570LM", "^NQDMXKRLCEURN", "^NQUSMLTCG", "^NQG9000LMAUD", "^NQGXJPLMGBPN", "^QMI", "^NQUSB9000LMCADN", "^IXIC", "^NQNALM", "^NQUS500LC", "^NQDMXGBLMJPY", "^NQNALMAUD", "^NQNA9000LMN", "^NQVMVUS", "^NQDXUSLCN", "^NQGXGBLMAUD", …]
-// fiftyTwoWeekLowChange: 151.87001
-// market: "us_market"
-// marketState: "REGULAR"
-// shortName: "Apple Inc."
-// priceHint: 2
-// targetPriceMean: 330.04
-// exchange: "NMS"
-// exchangeDataDelayedBy: 0
-// regularMarketPrice: 320.29
-// regularMarketTime: 1580921186
-// regularMarketChange: 1.4400024
-// regularMarketOpen: 323.52
-// regularMarketDayHigh: 324.73
-// regularMarketDayLow: 318.955
-// regularMarketVolume: 15887317
-// regularMarketChangePercent: 0.45162377
-// regularMarketDayRange: "318.955 - 324.73"
-// regularMarketPreviousClose: 318.85
-// bid: 320.6
-// ask: 320.63
-// bidSize: 8
-// askSize: 8
-// messageBoardId: "finmb_24937"
-// fullExchangeName: "NasdaqGS"
-// dividendYield: 1
-// longName: "Apple Inc."
-// averageDailyVolume3Month: 28920791
-// beta: 1.244671
-// fiftyTwoWeekLowChangePercent: 0.9017338
-// fiftyTwoWeekRange: "168.42 - 327.85"
-// fiftyTwoWeekHighChange: -7.5599976
-// fiftyTwoWeekHighChangePercent: -0.023059318
-// fiftyTwoWeekLow: 168.42
-// fiftyTwoWeekHigh: 327.85
-// earningsTimestamp: 1580247000
-// earningsTimestampStart: 1588085940
-// earningsTimestampEnd: 1588608000
-// trailingPE: 25.429934
-// dividendsPerShare: 3.04
-// dividendRate: 3.08
-// epsTrailingTwelveMonths: 12.595
-// symbol: "AAPL"
-/**********************END************************* */
-
-
-
+// currencyApi pass it 2 vars the 1) 3 letter Symbolfor the output example "AUD"
+//								  2) the ammount to change into    example "753.01"
+// url to Currency Symbols https://www.xe.com/symbols.php
 function currencyAPI(currencySymbols, amountUSD) {
-
-	// console.log("inprice =" + amountUSD);
+	// currencySymbols = "AWG";
 	var settings = {
 		"async": true,
 		"crossDomain": true,
-		"url": "https://currency-converter5.p.rapidapi.com/currency/convert?format=json&from=USD&to=" + currencySymbols + "&amount=" + amountUSD,
+		"url": "https://currency-converter5.p.rapidapi.com/currency/historical/2018-02-09?format=json&to=" + currencySymbols + "&from=USD&amount=" + amountUSD,
 		"method": "GET",
 		"headers": {
 			"x-rapidapi-host": "currency-converter5.p.rapidapi.com",
-			"x-rapidapi-key": "3b8ee98b70mshf74d3fe848bde7dp1f7b3ajsn392bc6e2ea65"
+			"x-rapidapi-key": "92cebe218cmshe8d74a9c1f090cep1da599jsn481891ebdf92"
 		}
-	};
-
-
-	// $.ajax(settings).done(function (response) {
-	// 	console.log(response);
-	// });
+	}
+	
+	
 
 	$.ajax(settings).done(function (response) {
 		rate = "response.rates" + currencySymbols + ".rate";
-		// rateTwo
-		// ."+currencySymbols+".rate"
 		console.log(response);
-		//var currencyReturn = response.rates.AUD.rate;
+		console.log(currencySymbols+" + "+amountUSD);
 		currencyReturn = response.rates[currencySymbols].rate_for_amount;
 		currencyReturn = parseFloat(currencyReturn).toFixed(2);
-		console.log("$---" + currencySymbols);
-		console.log("$---" + currencyReturn);
 		if (currencySymbols === "EUR") {
-			currencyAPI("EUR", marketPrice);
-			console.log("EUR=" + marketPrice);
-			console.log("currencyReturn=" + currencyReturn);
-			$("#defaultCtry1").text("EUR = " + currencyReturn);
+			lockPrice = marketPrice;
+			// currencyAPI("EUR", marketPrice);
+			$("#defaultCtry1").html(" " + currencyReturn);
 		}
 		if (currencySymbols === "JPY") {
-			$("#defaultCtry2").text("JPY = " + currencyReturn);
-			console.log("JPY=" + marketPrice);
-			console.log("currencyReturn=" + currencyReturn);
+			lockPrice = marketPrice;
+			// currencyAPI("JPY", marketPrice);
+			$("#defaultCtry2").html(" " + currencyReturn);
 		}
 		if (currencySymbols === "GBP") {
-			$("#defaultCtry3").text("GBP = " + currencyReturn);
-			console.log("GBP=" + marketPrice);
-			console.log("currencyReturn=" + currencyReturn);
+			lockPrice = marketPrice;
+			// currencyAPI("GBP", marketPrice);
+			$("#defaultCtry3").html(" " + currencyReturn);
 		}
-	
+		if (CCflag) {
+			$("#displayCurrencyValue").html(currencySymbols+" = " + currencyReturn);
+			console.log("currencyReturn=" + currencyReturn + "   stockSymbol=" + currencySymbols);
+			CCflag = false;
+		}
 	});
 }
 
-/************************Response Sample************************************ */
-// {amount: "1.0000", base_currency_code: "USD", base_currency_name: "US Dollar", rates: {…}, status: "success", …}
-// amount: "1.0000"
-// base_currency_code: "USD"
-// base_currency_name: "US Dollar"
-// rates:
-// AUD: {currency_name: "Australian Dollar", rate: "1.4880", rate_for_amount: "1.4880"}
-// __proto__: Object
-// status: "success"
-// updated_date: "2020-02-05"
-// __proto__: Object
-/************************************************ */
-// url to Currency Symbols https://www.xe.com/symbols.php
+//populates the dropdown box
+function fredCode() {
+	var nameTag = "<option value='0'>Select</option>";
+	for (let index = 0; index < currencyCh.length; index++) {
+		const name = currencyCh[index];
+		nameTag += "<option value='" + name + "'>" + name + "</option>"
+	}
+	document.getElementById('currencyChange').innerHTML = nameTag;
+}
+//gets the selected item and calls the currencyAPI to set the value
+$("#currencyChange").on("click", function (event) {
+	CCflag = true;
+	var selectVal = $("#currencyChange :selected").text();
+	var selectLenght = selectVal.length;
+	newsym = selectVal.slice((selectLenght - 3), selectLenght)
+	currencyAPI(newsym, lockPrice);
+	
+	console.log("newsym =" + newsym);
+	console.log($("#currencyChange :selected").text()); // The text content of the selected option
+	console.log($("#currencyChange :selected").val()); // The value of the selected option
+	console.log("lockprice=" + lockPrice + "   stockSymbol=" + newsym);
+});
