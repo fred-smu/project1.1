@@ -205,7 +205,7 @@ function financeNASDAQ() {
 
 	$.ajax(settings).done(function (response) {
 		var cur = response.marketSummaryResponse;
-		SNP = cur.result[0].regularMarketPrice.raw;
+		SNP = " "+ cur.result[0].regularMarketPrice.raw;
 		DJI = cur.result[1].regularMarketPrice.raw;
 		NASDAQ = cur.result[2].regularMarketPrice.raw;
 		// $("#dow").text(DJI);
