@@ -21,7 +21,7 @@ body {
     background-color: rgba(216, 240, 218, 0.548);
     border-radius: 5px;
 }
- 
+
 #searchResult, #displayCurrency {
     list-style-type: none;
 }
