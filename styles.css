@@ -3,9 +3,6 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
-select {
-    width: 150px;
-    }
  
 /* .container {
     justify-content: space-evenly;
@@ -30,9 +27,7 @@ body {
 #stockSymbol {
     width: 154px;
 }
-#currencyChange {
-    width: 150px;
-}
+
 h1 {
     color: white;
 }
@@ -54,9 +49,6 @@ h1 {
     text-align: center;
     width: 30px;
 }
-/* button:hover {
-    background: #ccc;
-  } */
 
 .defaultCtry {
     margin-top: 55px;
@@ -66,7 +58,8 @@ h1 {
     height: 30px;
     margin-top: 23px;
     padding: 1px;
-    border-width:  1px;    
+    border-width:  1px; 
+    /* width: 150px;    */
 }
 select:focus {
     min-width: 150px;
