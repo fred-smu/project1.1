@@ -10,9 +10,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-
-    
+    <script src="https://use.fontawesome.com/releases/v5.12.1/js/all.js"data-auto-a11y="true"></script>
+    <link rel="stylesheet" href="styles.css">    
     <title>Currency Converter</title>
 </head>
 
@@ -29,7 +28,7 @@
             <div class="col-4 text-center">NASDAQ <span id="nasdaq"></span></div>
         </div>
         <div class="row">
-            <div class="col-6 py-4"><input type="text" style="margin-right:5px"><button id="search-button">Look Up</button></div>
+            <div class="col-6 py-4"><input id="stockSymbol" type="text" style="margin-right:5px"><button id="search-button"><i class="fas fa-search"></i></button></div>
             <select class="px-md-3" id="currencyChange">
                 <option>Currency Selection</option>
                 <option>Words</option>
@@ -38,80 +37,35 @@
         </div>
         <div class="container">
             <div class="row">
-            
-                    <div class="col-4">
-                        <ul class="p-0" id="searchResult"style="list-style-type: none">
-                            <li>
-                                <a href="#">
-                                    Result
-                                </a>
-                            </li>
-                            <li>
-                                Apple <span></span>
-                            </li>
-                            <li>
-                                Microsoft <span></span>
-                            </li>
-                            <li>
-                                Ibm <span></span>
-                            </li>
-                            <li>
-                                Intel <span></span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-2">
-                        <ul class="p-0" style="list-style-type: none">
-                            <li>
-                                $ <span></span>
-                            </li>
-                            <li>
-                                $ <span></span>
-                            </li>
-                            <li>
-                                $ <span></span>
-                            </li>
-                            <li>
-                                $ <span></span>
-                            </li>
-                            <li>
-                                $ <span></span>
-                            </li>
-                        </ul>
-                    </div>
-                
-                    
-                            <div class="col-3">
-                                <div>KRW</div>
-                                <div>EUR</div>
-                                <div>CNY</div>
-                            </div>
-                            <div class="col-3">
-                                
-                                    Currency <span></span><br>
-                                    Value <span></span><br>
-                    
-                                
-                               
-                            </div>
-                        
-
+               <div class="col-4">
+                    <ul class="p-0" id="searchResult"style="list-style-type: none">                           
+                    </ul>
+               </div>                    
+                <div class="col-3">
+                    <div class="EUR">EUR<span id="defaultCtry1"></span></div>
+                    <div class="YEN">YEN<span id="defaultCtry2"></span></div>
+                    <div class="GBP">GBP<span id="defaultCtry3"></span></div>
+                </div>
+                <div class="col-3">                                
+                    <span id="displayCurrencyValue">Currency Value</span>
+                </div>
             </div>
-        </div>
-           
-        </div>
+        </div>           
     </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
+
