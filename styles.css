@@ -19,6 +19,7 @@ body {
 }
 .sp500, .dow, .nasdaq {
     background-color: rgba(216, 240, 218, 0.548);
+    border-radius: 5px;
 }
  
 #searchResult, #displayCurrency {
@@ -26,6 +27,7 @@ body {
 }
 #stockSymbol {
     width: 154px;
+    border-radius: 2px;
 }
 
 h1 {
@@ -59,7 +61,7 @@ h1 {
     margin-top: 23px;
     padding: 1px;
     border-width:  1px; 
-    /* width: 150px;    */
+    border-radius: 2px;
 }
 select:focus {
     min-width: 150px;
