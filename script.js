@@ -143,7 +143,7 @@ $("#search-button").on("click", function (event) {
 
 
 });
-$("#currencyChange").on("click", function (event) {
+$("#currencyChange").on("change", function (event) {
 	var selectVal = $("#currencyChange :selected").text();
 	var selectLenght = selectVal.length;
 	var newsym = selectVal.slice((selectLenght - 3), selectLenght)
@@ -152,16 +152,19 @@ $("#currencyChange").on("click", function (event) {
 function financeAPI(stockSymbol) {
 
 	var stockSettings = {
-		"async": true,
-		"crossDomain": true,
-		// "url": "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-summary?region=US&lang=en&",
-		"url": "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-quotes?region=US&lang=en&symbols=" + stockSymbol + "%252CKC%253DF%252C002210.KS%252CIWM%252CAMECX",
-		"method": "GET",
-		"headers": {
-			"x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-			"x-rapidapi-key": "92cebe218cmshe8d74a9c1f090cep1da599jsn481891ebdf92"
-		}
-	};
+    async: true,
+    crossDomain: true,
+    // "url": "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-summary?region=US&lang=en&",
+    url:
+      "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-quotes?region=US&lang=en&symbols=" +
+      stockSymbol +
+      "%252CKC%253DF%252C002210.KS%252CIWM%252CAMECX",
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
+      "x-rapidapi-key": "d70d653601mshede7e7ed8e9af16p124362jsn3d74fdf16a19"
+    }
+  };
 
 	$.ajax(stockSettings).done(function (stockResponse) {
 		console.log(stockResponse);
@@ -267,7 +270,7 @@ function fredCode() {
 	document.getElementById('currencyChange').innerHTML = nameTag;
 }
 //gets the selected item and calls the currencyAPI to set the value
-$("#currencyChange").on("click", function (event) {
+$("#currencyChange").on("change", function (event) {
 	CCflag = true;
 	var selectVal = $("#currencyChange :selected").text();
 	var selectLenght = selectVal.length;
