@@ -191,15 +191,17 @@ function financeNASDAQ() {
 
 
 	var settings = {
-		"async": true,
-		"crossDomain": true,
-		"url": "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-summary?region=US&lang=en",
-		"method": "GET",
-		"headers": {
-			"x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-			"x-rapidapi-key": "92cebe218cmshe8d74a9c1f090cep1da599jsn481891ebdf92"
-		}
-	};
+    async: true,
+    crossDomain: true,
+    url:
+      "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-summary?region=US&lang=en",
+    method: "GET",
+    headers: {
+      "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
+      // "x-rapidapi-key": "92cebe218cmshe8d74a9c1f090cep1da599jsn481891ebdf92"
+      "x-rapidapi-key": "d70d653601mshede7e7ed8e9af16p124362jsn3d74fdf16a19"
+    }
+  };
 
 	$.ajax(settings).done(function (response) {
 		var cur = response.marketSummaryResponse;
