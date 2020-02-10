@@ -17,9 +17,9 @@ body {
     background-attachment: fixed;
     background-repeat: no-repeat;
 }
-/* .sp500, .dow, .nasdaq, .col-3, .col-2 {
-    border: solid black;
-} */
+.sp500, .dow, .nasdaq {
+    background-color: rgba(216, 240, 218, 0.548);
+}
  
 #searchResult, #displayCurrency {
     list-style-type: none;
