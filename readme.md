@@ -13,6 +13,7 @@ HTML
 JQuery
 Javascript
 AJAX
+currency.js
 
 Future Use:
 There are additional design elements which could be built into the app for future expanded use, such as a charting module, histogram, comparison module, and latest news for the stock.
@@ -28,6 +29,7 @@ You'll need the bootstrap CDN for CSS, jQuery, Popper.js, and jQuery's slim buil
 
 API's: for our api's we used two different api's hosted on https://rapidapi.com/. The first, is yahoo finance at https://rapidapi.com/apidojo/api/yahoo-finance1. The second, is investor's exchange at https://rapidapi.com/eec19846/api/investors-exchange-iex-trading.
 
+Currency.js: we used this library to work with the above api's https://currency.js.org/.
 
 Project Link: https://github.com/fred-smu/project1.1
 
