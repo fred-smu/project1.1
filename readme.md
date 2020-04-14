@@ -1,5 +1,6 @@
 Currency Converter Application
 
+
 THis is an app designed to convert a stock's price into a country's currency that you choose.
 For exaple, when you look up Microsoft, it will return the stock's value in USD and in the Currency Selection box will allow you to select a country of choice to return that country's currency value.
 
