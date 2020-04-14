@@ -5,6 +5,13 @@ For exaple, when you look up Microsoft, it will return the stock's value in USD 
 
 So, if you were in a foreign country and wanted to know how much a stock is trading for in that country, you would search for your stock first and then select your country to see the value in that country's currency.
 
+
+## Click [here](https://index.html/) for the live app.
+
+This is the home page:
+
+![Home Screenshot](./photo/project1.1.png)
+
 This app was designed using the following technologies:
 
 Bootstrap
