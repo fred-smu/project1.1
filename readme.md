@@ -7,6 +7,7 @@ For exaple, when you look up Microsoft, it will return the stock's value in USD 
 So, if you were in a foreign country and wanted to know how much a stock is trading for in that country, you would search for your stock first and then select your country to see the value in that country's currency.
 
 This is the home page:
+Project Link: https://github.com/fred-smu/project1.1
 
 ![Home Screenshot](./photo/project1.1.png)
 
@@ -36,7 +37,7 @@ API's: for our api's we used two different api's hosted on https://rapidapi.com/
 
 Currency.js: we used this library to work with the above api's https://currency.js.org/.
 
-Project Link: https://github.com/fred-smu/project1.1
+
 
 Team Acknowledgement:
 Fred Guthrie: Back-end programming.
